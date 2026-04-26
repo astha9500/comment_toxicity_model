@@ -1,127 +1,88 @@
-# 🚫 Comment Toxicity Classifier
+# 🚫 Comment Toxicity Classifier: NLP for Online Safety
 
-A deep learning project designed to detect and categorize toxic comments across multiple categories such as toxicity, threats, insults, and identity hate. This system uses Natural Language Processing (NLP) techniques and a Bidirectional LSTM architecture to understand context and intent in text.
+![Project Banner](assets/banner.png)
+
+A high-performance Deep Learning solution designed to detect and categorize toxic comments into six distinct categories. Built using a **Bidirectional LSTM** architecture, this project aims to foster healthier online communities by identifying harmful language with high precision.
+
+---
+
+## ✨ Key Features
+
+*   **Multi-Label Classification**: Simultaneously detects Toxicity, Severe Toxicity, Obscene language, Threats, Insults, and Identity Hate.
+*   **Context-Aware Analysis**: Utilizes Bidirectional LSTMs to understand the nuances of language from both directions.
+*   **Real-Time GUI**: Includes a sleek **Gradio** web interface for instant model testing.
+*   **Efficient Pipeline**: Implements the `tf.data` API for lightning-fast data processing and buffering.
+*   **Production Ready**: Model weights are saved and ready for deployment.
+
+---
+
+## 📸 Project Preview
+
+| Interactive Interface | Classification Results |
+| :---: | :---: |
+| ![Interface Demo](assets/demo.gif) | ![Results Graph](assets/results.png) |
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Languge**: Python 3.10+
-- **Deep Learning Framework**: TensorFlow 2.15 (Legacy Keras compatibility)
-- **Data Manipulation**: Pandas, NumPy
-- **Preprocessing**: Keras TextVectorization
-- **Model Architecture**: Bidirectional LSTM (Long Short-Term Memory)
-- **Evaluation**: Scikit-learn, Keras Metrics
-- **User Interface**: Gradio (Web-based interactive GUI)
-- **Visualization**: Matplotlib
+*   **Language**: Python 3.10+
+*   **Deep Learning**: TensorFlow 2.15 (Bidirectional LSTM)
+*   **Data Pipeline**: Pandas, NumPy, Keras TextVectorization
+*   **UI/UX**: Gradio
+*   **Visualization**: Matplotlib
+*   **Evaluation**: Scikit-Learn Metrics
 
 ---
 
-## 📊 Dataset Details
+## 🧠 Model Architecture
 
-The project utilizes the **Jigsaw Toxic Comment Classification Challenge** dataset from Kaggle.
-- **Source**: Wikipedia talk page comments.
-- **Labels**: 159,571 comments labeled by human raters.
-- **Categories**: 6 binary labels (Toxic, Severe Toxic, Obscene, Threat, Insult, Identity Hate).
-- **Class Imbalance**: Most comments are non-toxic, making the detection of rare categories (like 'Identity Hate' or 'Threat') more challenging.
+The core of this project is a **Bidirectional Long Short-Term Memory (Bi-LSTM)** network. Unlike traditional RNNs, Bi-LSTMs process text sequences in both directions (past to future and future to past), allowing the model to capture the full context of a word based on its surroundings.
 
----
-
-## 🧪 Example Test Cases
-
-You can use the following comments to test the model's sensitivity in the Gradio interface:
-
-| Comment Type | Example Text | Expected Behavior |
-| :--- | :--- | :--- |
-| **Neutral** | "I disagree with this edit, but I respect your opinion." | All categories should be False. |
-| **Toxic** | "You are completely wrong and you shouldn't be allowed to edit." | High probability for 'Toxic'. |
-| **Threat** | "I am coming for you, you won't see another day." | High probability for 'Threat'. |
-| **Obscene** | "[Expletive] you and your stupid website!" | High probability for 'Obscene' and 'Insult'. |
-| **Identity Hate** | "People from your country don't belong here." | High probability for 'Identity Hate'. |
+1.  **Embedding Layer**: Converts words into 32-dimensional dense vectors.
+2.  **Bidirectional LSTM**: Core processing unit with 64 units per direction.
+3.  **Feature Extraction**: Dense layers with ReLU activation for high-level pattern recognition.
+4.  **Output Layer**: 6 units with Sigmoid activation for independent multi-label probabilities.
 
 ---
 
-## 🔬 Deep Dive: Why Bidirectional LSTM?
+## 🚀 Getting Started
 
-Standard RNNs only read text from left to right. However, the toxicity of a word often depends on the words that come *after* it.
-- **Standard LSTM**: "I will kill..." (seems like a threat, but might end with "...the mood")
-- **Bidirectional LSTM**: Reads "I will kill the mood" from both sides, understanding that "mood" changes the intent of "kill".
-
----
-
-## 🚀 How to Run the Model
-
-The system follows a standard NLP pipeline:
-
-1.  **Data Acquisition**: Loads the Jigsaw Toxic Comment Classification dataset containing over 150,000 labeled comments.
-2.  **Preprocessing**:
-    *   **Text Vectorization**: Converts raw text into integers.
-    *   **Vocabulary Adaptation**: Learns the top 200,000 words from the training corpus.
-    *   **Dataset Pipeline**: Uses the `tf.data` API for efficient buffering (`cache`, `shuffle`, `batch`, `prefetch`).
-3.  **Model Architecture**:
-    *   **Embedding Layer**: Maps words to 32-dimensional dense vectors.
-    *   **Bidirectional LSTM**: Processes text in both forward and backward directions to capture full context.
-    *   **Dense Layers**: Extraction of high-level features through ReLU-activated fully connected layers.
-    *   **Output Layer**: 6 units with Sigmoid activation (one for each toxicity category).
-4.  **Training**: Optimized using `BinaryCrossentropy` and the `Adam` optimizer.
-5.  **Evaluation**: Precision, Recall, and Categorical Accuracy are measured for performance.
-6.  **Deployment**: A Gradio web interface provides a real-time way for users to test the model.
-
----
-
-## 🚀 How to Run the Model
-
-### 1. Prerequisites
-Ensure you have Python 3.10+ installed on your system.
-
-### 2. Set Up Virtual Environment
-It is highly recommended to use a virtual environment to manage specific dependency versions.
-
-```powershell
-# Create venv
-python -m venv venv
-
-# Activate venv (Windows)
-.\venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-The model requires TensorFlow 2.15 to load the pre-trained weights correctly.
+### 1. Installation
+Clone the repository and install the dependencies. It is recommended to use a virtual environment.
 
 ```bash
-pip install "tensorflow<2.16" pandas gradio scikit-learn matplotlib jinja2
+# Clone the repo
+git clone https://github.com/astha9500/comment_toxicity_model.git
+cd comment_toxicity_model
+
+# Setup venv
+python -m venv venv
+.\venv\Scripts\activate
+
+# Install requirements
+pip install "tensorflow<2.16" pandas gradio scikit-learn matplotlib
 ```
 
-### 4. Running the Evaluation
-Launch the Gradio interface:
+### 2. Usage
+To launch the interactive Gradio interface:
 
 ```bash
 python run_notebook.py
 ```
 
-### 5. Accessing the UI
-Open your browser to:
-**`http://127.0.0.1:7860`**
+Open your browser and navigate to `http://127.0.0.1:7860` to start testing comments.
 
 ---
 
-## 📊 Model Categories
-The model predicts:
-*   **Toxic**
-*   **Severe Toxic**
-*   **Obscene**
-*   **Threat**
-*   **Insult**
-*   **Identity Hate**
+## 📊 Dataset Reference
+This project uses the **Jigsaw Toxic Comment Classification** dataset from Kaggle, containing over 150k labeled comments from Wikipedia talk pages.
 
 ---
 
-## 📂 Project Structure
-*   `Toxicity.ipynb`: Original development notebook.
-*   `toxicity.h5`: Pre-trained model file.
-*   `run_notebook.py`: Automated execution script.
-*   `jigsaw-toxic-comment-classification-challenge/`: Dataset source.
-*   `venv/`: Project environment.
+## 🤝 Contributing
+Contributions are welcome! If you have suggestions for improving model accuracy or adding new features, feel free to open an issue or submit a pull request.
 
 ---
-*Created for automated toxicity evaluation.*
+
+*Built with ❤️ for a safer internet.*
