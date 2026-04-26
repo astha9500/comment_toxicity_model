@@ -1,6 +1,6 @@
 # 🚫 Comment Toxicity Classifier: NLP for Online Safety
 
-![Project Banner](assets/banner.png)
+![Project Banner](assets/Screenshot%202026-04-26%20173406.png)
 
 A high-performance Deep Learning solution designed to detect and categorize toxic comments into six distinct categories. Built using a **Bidirectional LSTM** architecture, this project aims to foster healthier online communities by identifying harmful language with high precision.
 
@@ -18,9 +18,15 @@ A high-performance Deep Learning solution designed to detect and categorize toxi
 
 ## 📸 Project Preview
 
-| Interactive Interface | Classification Results |
+| Model Performance | Interactive Interface |
 | :---: | :---: |
-| ![Interface Demo](assets/demo.gif) | ![Results Graph](assets/results.png) |
+| ![Performance](assets/Screenshot%202026-04-26%20173504.png) | ![Interface](assets/Screenshot%202026-04-26%20173527.png) |
+
+### 🔍 More Screenshots
+
+| Accuracy Metrics | Loss Plots | Prediction Results |
+| :---: | :---: | :---: |
+| ![Metrics](assets/Screenshot%202026-04-26%20173535.png) | ![Loss](assets/Screenshot%202026-04-26%20173543.png) | ![Results](assets/Screenshot%202026-04-26%20173555.png) |
 
 ---
 
